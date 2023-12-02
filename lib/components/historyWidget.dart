@@ -23,7 +23,6 @@ class HistoryWidget extends StatelessWidget {
                 if (snapshot.connectionState == ConnectionState.done) {
                   List<dynamic> history = localStorage.getItem('history') ?? [];
                   if (history.isEmpty) {
-                    // Si no hay datos, muestra un mensaje
                     return Center(
                       child: Text("No hay datos",
                           style: TextStyle(

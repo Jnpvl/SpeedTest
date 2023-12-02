@@ -1,4 +1,3 @@
-import 'package:flare_flutter/flare_controls.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_internet_speed_test/flutter_internet_speed_test.dart';
 import 'package:localstorage/localstorage.dart';
@@ -15,8 +14,6 @@ class SpeedTestWidget extends StatefulWidget {
 }
 
 class _SpeedTestWidgetState extends State<SpeedTestWidget> {
-  final FlareControls _flareControls = FlareControls();
-
   bool _testInProgress = false;
   double _downloadRate = 0;
   double _uploadRate = 0;
