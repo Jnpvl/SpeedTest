@@ -35,6 +35,7 @@ dependencies:
   flutter_internet_speed_test: ^1.4.0
   intl: ^0.18.1
   localstorage: ^4.0.1+4
+  percent_indicator: ^4.2.3
 
 dev_dependencies:
   flutter_lints: ^2.0.0

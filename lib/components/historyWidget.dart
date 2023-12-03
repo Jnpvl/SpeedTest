@@ -1,12 +1,15 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables
-
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:intl/intl.dart';
 
-class HistoryWidget extends StatelessWidget {
+class HistoryWidget extends StatefulWidget {
   const HistoryWidget({Key? key}) : super(key: key);
 
+  @override
+  State<HistoryWidget> createState() => _HistoryWidgetState();
+}
+
+class _HistoryWidgetState extends State<HistoryWidget> {
   @override
   Widget build(BuildContext context) {
     final localStorage = LocalStorage('speed_test_data');
