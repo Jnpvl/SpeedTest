@@ -27,10 +27,10 @@ class _SpeedTestWidgetState extends State<SpeedTestWidget> {
   String _uploadProgress = '0';
   int _downloadCompletionTime = 0;
   int _uploadCompletionTime = 0;
-  bool _isServerSelectionInProgress = false;
+  //bool _isServerSelectionInProgress = false;
 
   String? _ip;
-  String? _asn;
+  // String? _asn;
   String? _isp;
 
   String _unitText = 'Mbps';
@@ -194,14 +194,14 @@ class _SpeedTestWidgetState extends State<SpeedTestWidget> {
             },
             onDefaultServerSelectionInProgress: () {
               setState(() {
-                _isServerSelectionInProgress = true;
+                //  _isServerSelectionInProgress = true;
               });
             },
             onDefaultServerSelectionDone: (Client? client) {
               setState(() {
-                _isServerSelectionInProgress = false;
+                // _isServerSelectionInProgress = false;
                 _ip = client?.ip;
-                _asn = client?.asn;
+                // _asn = client?.asn;
                 _isp = client?.isp;
               });
             },
@@ -257,7 +257,7 @@ class _SpeedTestWidgetState extends State<SpeedTestWidget> {
       _uploadCompletionTime = 0;
 
       _ip = null;
-      _asn = null;
+      // _asn = null;
       _isp = null;
     });
   }
