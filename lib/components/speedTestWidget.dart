@@ -1,6 +1,6 @@
-import 'package:flare_flutter/flare_controls.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_internet_speed_test/flutter_internet_speed_test.dart';
+import 'package:localstorage/localstorage.dart';
 
 import '../services/speedTest.dart';
 
@@ -14,8 +14,6 @@ class SpeedTestWidget extends StatefulWidget {
 }
 
 class _SpeedTestWidgetState extends State<SpeedTestWidget> {
-  final FlareControls _flareControls = FlareControls();
-
   bool _testInProgress = false;
   double _downloadRate = 0;
   double _uploadRate = 0;
@@ -104,6 +102,8 @@ class _SpeedTestWidgetState extends State<SpeedTestWidget> {
                 _uploadCompletionTime = upload.durationInMillis;
                 _testInProgress = false;
               });
+
+              saveTestData(download, upload);
             },
             onProgress: (double percent, TestResult data) {
               setState(() {
@@ -154,6 +154,21 @@ class _SpeedTestWidgetState extends State<SpeedTestWidget> {
         }
       },
     );
+  }
+
+  void saveTestData(TestResult download, TestResult upload) async {
+    final localStorage = LocalStorage('speed_test_data');
+    await localStorage.ready;
+
+    List<dynamic> history = localStorage.getItem('history') ?? [];
+    history.add({
+      'date': DateTime.now().toString(),
+      'downloadSpeed': download.transferRate,
+      'uploadSpeed': upload.transferRate,
+      'ip': _ip,
+    });
+
+    localStorage.setItem('history', history);
   }
 
   void reset() {

@@ -1,22 +1,52 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:localstorage/localstorage.dart';
+import 'package:intl/intl.dart';
 
 class HistoryWidget extends StatelessWidget {
-  const HistoryWidget({Key? key});
+  const HistoryWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final localStorage = LocalStorage('speed_test_data');
+
     return Container(
       color: Colors.white,
       child: Column(
         children: [
           const _titles(),
           Expanded(
-            child: ListView.separated(
-              itemBuilder: (context, index) => _cardData(),
-              separatorBuilder: (context, index) => Divider(),
-              itemCount: 13,
+            child: FutureBuilder(
+              future: localStorage.ready,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  List<dynamic> history = localStorage.getItem('history') ?? [];
+                  if (history.isEmpty) {
+                    return Center(
+                      child: Text("No hay datos",
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold)),
+                    );
+                  }
+                  List<dynamic> reversedHistory = history.reversed.toList();
+                  return ListView.separated(
+                    itemCount: reversedHistory.length,
+                    itemBuilder: (context, index) {
+                      var data = reversedHistory[index];
+                      return _cardData(
+                        date: data['date'],
+                        ip: data['ip'],
+                        downloadSpeed: '${data['downloadSpeed']} Mbps',
+                        uploadSpeed: '${data['uploadSpeed']} Mbps',
+                      );
+                    },
+                    separatorBuilder: (context, index) => Divider(),
+                  );
+                } else {
+                  return Center(child: CircularProgressIndicator());
+                }
+              },
             ),
           ),
         ],
@@ -26,51 +56,62 @@ class HistoryWidget extends StatelessWidget {
 }
 
 class _cardData extends StatelessWidget {
+  final String date;
+  final String ip;
+  final String downloadSpeed;
+  final String uploadSpeed;
+
   const _cardData({
-    super.key,
-  });
+    Key? key,
+    required this.date,
+    required this.ip,
+    required this.downloadSpeed,
+    required this.uploadSpeed,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final dateTime =
+        DateFormat("yyyy-MM-dd HH:mm").format(DateTime.parse(date));
     return Container(
       margin: EdgeInsets.all(8),
       decoration: BoxDecoration(
-        //color: Colors.deepPurple,
         borderRadius: BorderRadius.circular(25),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
-            //color: Colors.red,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  '05/01/2023',
+                  dateTime,
                   style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  '192.90.20',
+                  ip,
                   style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
           ),
           Expanded(
-              child: Container(
-                  // color: Colors.red,
-                  child: Center(
-                      child: Text(
-            '82.4d0',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          )))),
+            child: Center(
+              child: Text(
+                downloadSpeed,
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
           Expanded(
-              child: Container(
-                  //color: Colors.yellow,
-                  child: Center(
-                      child: Text('82.40',
-                          style: TextStyle(fontWeight: FontWeight.bold))))),
+            child: Center(
+              child: Text(
+                uploadSpeed,
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
         ],
       ),
     );
