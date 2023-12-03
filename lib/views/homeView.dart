@@ -12,6 +12,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final SpeedTestManager speedTestManager = SpeedTestManager();
+
     return DefaultTabController(
         length: 2,
         child: Scaffold(
@@ -21,7 +22,10 @@ class HomeView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('X'),
-                Text('Speed Test'),
+                Text(
+                  'Speed Test',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
                 GestureDetector(
                     onTap: () {
                       PopUpWidget(context);
