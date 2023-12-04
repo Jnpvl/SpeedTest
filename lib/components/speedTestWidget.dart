@@ -77,7 +77,7 @@ class _SpeedTestWidgetState extends State<SpeedTestWidget> {
                   ),
                 ),
                 Text(
-                  'Dowloading',
+                  'Dowloading...',
                   style: TextStyle(fontWeight: FontWeight.bold),
                 )
               ],
@@ -98,7 +98,8 @@ class _SpeedTestWidgetState extends State<SpeedTestWidget> {
                     height: 150,
                   ),
                 ),
-                Text('Uploading', style: TextStyle(fontWeight: FontWeight.bold))
+                Text('Uploading...',
+                    style: TextStyle(fontWeight: FontWeight.bold))
               ],
             ),
           )
