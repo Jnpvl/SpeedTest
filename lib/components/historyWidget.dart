@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:intl/intl.dart';
+import 'package:speedtest/components/AddWidget.dart';
 
 class HistoryWidget extends StatefulWidget {
   const HistoryWidget({Key? key}) : super(key: key);
@@ -18,6 +19,7 @@ class _HistoryWidgetState extends State<HistoryWidget> {
       color: Colors.white,
       child: Column(
         children: [
+          BannerAdWidget(),
           const _titles(),
           Expanded(
             child: FutureBuilder(

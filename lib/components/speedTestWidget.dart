@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_internet_speed_test/flutter_internet_speed_test.dart';
 import 'package:localstorage/localstorage.dart';
+import 'package:speedtest/components/AddWidget.dart';
 
 import '../services/speedTest.dart';
 
@@ -39,9 +40,9 @@ class _SpeedTestWidgetState extends State<SpeedTestWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 20),
+        BannerAdWidget(),
         Container(
-          margin: EdgeInsets.only(top: 20),
+          margin: EdgeInsets.only(top: 5),
           child: _dowloadUpload(
             downloadRate: _downloadRate,
             unitText: _unitText,

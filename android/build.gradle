@@ -10,6 +10,11 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
+ext {
+    flutterMinSdkVersion = 21 // Cambia según lo que necesites
+    flutterTargetSdkVersion = 34
+    flutterCompileSdkVersion = 34
+}
 
 allprojects {
     repositories {
