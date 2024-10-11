@@ -1,4 +1,4 @@
-![Screenshot_1728607869](https://github.com/user-attachments/assets/a41bc9a9-5579-4ed5-8ba4-8a2880e2f332)# Speed Test App
+# Speed Test App
 
 **Speed Test** es una aplicación móvil desarrollada en **Flutter** que te permite medir la velocidad de tu conexión a Internet de manera rápida y sencilla. Con esta aplicación, podrás realizar pruebas de velocidad de descarga, subida y latencia, y guardar los resultados para futuras referencias.
 
